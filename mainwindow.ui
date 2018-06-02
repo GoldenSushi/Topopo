@@ -1,0 +1,252 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>688</width>
+    <height>331</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">QWidget#centralWidget 
+{
+	background :  grey;
+	button-layout: 2
+}
+
+QPushButton
+{
+	color: palette(shadow);
+	background: white;
+	border-radius: 8px
+}
+
+QPushButton:hover
+{
+	color: palette(shadow);
+	background: white;
+	border-radius: 10px;
+	border: 2px solid grey
+}
+
+QTableWidget
+{
+	border-radius: 2px;
+	selection-background-color: darkgray;
+}
+
+QHeaderView::section 
+{
+	background-color: darkgrey;
+	border: none;
+}
+
+QHeaderView::section:hover 
+{
+	color: white;
+	background-color: rgb(109, 109, 109);
+	border: 1px solid grey;
+}
+
+QLineEdit
+{
+	border-radius: 2px;
+	selection-background-color: darkgray;
+	padding: 2px
+}
+
+QLineEdit:focus
+{
+	border-radius: 5px;
+	selection-background-color: darkgray;
+	padding: 3px
+}</string>
+  </property>
+  <widget class="QWidget" name="centralWidget">
+   <property name="sizePolicy">
+    <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+     <horstretch>0</horstretch>
+     <verstretch>0</verstretch>
+    </sizepolicy>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>0</width>
+     <height>0</height>
+    </size>
+   </property>
+   <property name="styleSheet">
+    <string notr="true"/>
+   </property>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="4" column="0" colspan="3">
+     <widget class="QTableWidget" name="table">
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <attribute name="horizontalHeaderVisible">
+       <bool>true</bool>
+      </attribute>
+      <attribute name="horizontalHeaderCascadingSectionResizes">
+       <bool>false</bool>
+      </attribute>
+      <attribute name="horizontalHeaderDefaultSectionSize">
+       <number>50</number>
+      </attribute>
+      <attribute name="horizontalHeaderMinimumSectionSize">
+       <number>50</number>
+      </attribute>
+      <attribute name="horizontalHeaderStretchLastSection">
+       <bool>true</bool>
+      </attribute>
+      <attribute name="verticalHeaderVisible">
+       <bool>false</bool>
+      </attribute>
+      <attribute name="verticalHeaderDefaultSectionSize">
+       <number>50</number>
+      </attribute>
+      <attribute name="verticalHeaderMinimumSectionSize">
+       <number>50</number>
+      </attribute>
+      <column>
+       <property name="text">
+        <string>Estação</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Ponto Visado</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Ângulo Horizontal</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Azimute</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Distância Horizontal</string>
+       </property>
+      </column>
+      <column>
+       <property name="text">
+        <string>Observações</string>
+       </property>
+      </column>
+     </widget>
+    </item>
+    <item row="1" column="2" alignment="Qt::AlignHCenter">
+     <widget class="QFrame" name="frame">
+      <property name="frameShape">
+       <enum>QFrame::StyledPanel</enum>
+      </property>
+      <property name="frameShadow">
+       <enum>QFrame::Raised</enum>
+      </property>
+      <layout class="QGridLayout" name="gridLayout_2">
+       <item row="0" column="0">
+        <widget class="QLabel" name="label">
+         <property name="minimumSize">
+          <size>
+           <width>153</width>
+           <height>13</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">QLabel
+{
+	color: white
+}</string>
+         </property>
+         <property name="text">
+          <string>         Azimute de Referência E0 -&gt; E1</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="0">
+        <widget class="QLineEdit" name="azimuthEntry">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>219</width>
+           <height>20</height>
+          </size>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QPushButton" name="newpoint">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>50</width>
+        <height>50</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true"/>
+      </property>
+      <property name="text">
+       <string>Novo Ponto</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="1">
+     <widget class="QPushButton" name="removepoint">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="baseSize">
+       <size>
+        <width>10</width>
+        <height>10</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Remover Ponto</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources/>
+ <connections/>
+</ui>
