@@ -90,12 +90,12 @@ void MainWindow::on_azimuthEntry_textChanged(const QString &arg1)
 
 void MainWindow::on_table_cellChanged(int row, int column)
 {
-    QStringList list;
     bool cell_content = ui->table->item(row, column); //returns 0 if pointer is null
+    if (!cell_content) { return; }
+    QStringList list = Angle::clean_angle_txt(ui->table->item(row, column)->text()).split(" ");
 
-    if (cell_content && column == HOR_ANG) //checks if its a non-null column related to angles
+    if (column == HOR_ANG) //checks if its a non-null column related to angles
     {
-        list = Angle::clean_angle_txt(ui->table->item(row, column)->text()).split(" ");
         if (Angle::validate(list))
         {
             if (Angle::validate(Angle::clean_angle_txt(ui->azimuthEntry->text()).split(" "))) //updates azimuth if reference is valid
@@ -106,11 +106,18 @@ void MainWindow::on_table_cellChanged(int row, int column)
         return;
     }
 
-    if (cell_content && column == AZIMUTH) //checks if its a non-null column related to angles
+    if (column == AZIMUTH) //checks if its a non-null column related to angles
     {
-        list = Angle::clean_angle_txt(ui->table->item(row, column)->text()).split(" ");
         if (Angle::validate(list))
         { ui->table->item(row, column)->setText(Angle::angle_format(list)); }
+        return;
+    }
+
+    if (column == POINT)
+    {
+        if (ui->table->item(row, HOR_ANG) && Angle::validate(Angle::clean_angle_txt(ui->azimuthEntry->text()).split(" "))) //updates azimuth if reference is valid
+        { Angle::azimuth_calc(ui->table, Angle::clean_angle_txt(ui->azimuthEntry->text()).split(" ")); }
+        return;
     }
 }
 

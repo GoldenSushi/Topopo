@@ -16,7 +16,6 @@ public:
     explicit InsertDiag(QWidget *parent = 0);
     ~InsertDiag();
 
-//setters and getters
  public:
 
     QString getEntry1() const;

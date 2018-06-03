@@ -125,9 +125,10 @@ void Angle::azimuth_calc(QTableWidget *table, const QStringList &ref_azimuth)
 
     for (int i = 0; i < rows; ++i)
     {
-        if (table->item(i, POINT)->text() == "Vante")
+        if (i != 0 && table->item(i, HOR_ANG) && table->item(i-1, POINT)->text() == "Vante")
         {
-            current_reference = correct_azimuth(current_reference, clean_angle_txt(table->item(i, HOR_ANG)->text()).split(" "));
+            if (validate(clean_angle_txt(table->item(i, HOR_ANG)->text()).split(" ")))
+                current_reference = correct_azimuth(current_reference, clean_angle_txt(table->item(i, HOR_ANG)->text()).split(" "));
         }
 
         if (table->item(i, HOR_ANG) && validate(clean_angle_txt(table->item(i, HOR_ANG)->text()).split(" ")))
