@@ -4,7 +4,7 @@ Allows the user to organize traverse survey data. Calculates azimuth automagical
 
 ## Usage
 
-The data must be put in order, and the provided reference azimuth must be measured in the clockwise direction. The user may provide as many measurements he or she whishes from the same point, but when moving to the next point of the polygon, the word "Vante" (forward in Portuguese) must be written at the Point column so the program changes the reference azimuth accordingly for all values after that point (yeah, pretty annoying. Should be easier to use in the future).
+The data must be put in order, and the provided reference azimuth must be measured in the clockwise direction. The user may provide as many measurements he or she whishes from the same point, but when moving to the next "Ponto Visado" (the point being measured) of the polygon, the word "Vante" (forward in Portuguese) must be written at the Point column so the program changes the reference azimuth accordingly for all values after that point (yeah, pretty annoying. Should be easier to use in the future).
 
 ## Known Issues
 
