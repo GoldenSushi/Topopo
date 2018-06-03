@@ -64,7 +64,7 @@ QLabel
        <item>
         <widget class="QLabel" name="label1">
          <property name="text">
-          <string>Estação (Obrigatório)</string>
+          <string>Estação</string>
          </property>
         </widget>
        </item>

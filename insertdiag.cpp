@@ -11,6 +11,11 @@ InsertDiag::InsertDiag(QWidget *parent) :
 }
 
 //******** Getters and Setters ******************************************
+QLineEdit* InsertDiag::getEntry2_ptr() const
+{
+    return ui->entry2;
+}
+
 QString InsertDiag::getEntry1() const
 {
     return ui->entry1->text();

@@ -39,28 +39,25 @@ void MainWindow::on_newpoint_clicked()
     if (ui->table->item(last_row, 0)) { autofill = ui->table->item(last_row, 0)->text(); } //checks if item isnt null
 
     diag.setEntry1(autofill);
+    if (autofill != "") { diag.getEntry2_ptr()->setFocus(); } //jumps to entry2 if first entry is filled
     return_signal = diag.exec();
 
     if (return_signal == InsertDiag::Accepted)
     {
-        if(diag.getEntry1().isEmpty())
-        {
-            WarningDiag w_diag;
-            w_diag.exec();
-            return;
-        }
         ui->table->insertRow(last_row+1);
         for (int column = 0; column < ui->table->columnCount(); ++column)
         {
-            ui->table->setItem(last_row, column, (new QTableWidgetItem("")));
+            ui->table->setItem(last_row, column, new QTableWidgetItem(""));
         }
-        ui->table->setItem(last_row, STATION, new QTableWidgetItem(diag.getEntry1()));
-        ui->table->setItem(last_row, POINT, new QTableWidgetItem(diag.getEntry2()));
-        ui->table->setItem(last_row, HOR_ANG, new QTableWidgetItem(diag.getEntry3()));
-        ui->table->setItem(last_row, AZIMUTH, new QTableWidgetItem(diag.getEntry4()));
-        ui->table->setItem(last_row, HOR_DIST, new QTableWidgetItem(diag.getEntry5()));
-        ui->table->setItem(last_row, OBS, new QTableWidgetItem(diag.getEntry6()));
+        ui->table->item(last_row, STATION)->setText(diag.getEntry1());
+        ui->table->item(last_row, POINT)->setText(diag.getEntry2());
+        ui->table->item(last_row, HOR_ANG)->setText(diag.getEntry3());
+        ui->table->item(last_row, AZIMUTH)->setText(diag.getEntry4());
+        ui->table->item(last_row, HOR_DIST)->setText(diag.getEntry5());
+        ui->table->item(last_row, OBS)->setText(diag.getEntry6());
     }
+    if (ui->table->item(0, 0)) //updates azimuthEntry and thus calls on_table_cellChanged, refreshing the table
+        on_table_cellChanged(0, 0);
 }
 
 void MainWindow::on_removepoint_clicked()
@@ -78,7 +75,12 @@ void MainWindow::on_azimuthEntry_textChanged(const QString &arg1)
     if (Angle::validate(list))
     {
         ui->azimuthEntry->setText(Angle::angle_format(list));
-        ui->azimuthEntry->setCursorPosition(cursor_pos);
+
+        if (arg1.indexOf(Angle::angle_symbols[Angle::DEGREE]) != -1) //increments cursor position if text wasn't formatted before
+            ui->azimuthEntry->setCursorPosition(cursor_pos);
+        else
+            ui->azimuthEntry->setCursorPosition(cursor_pos + 2);
+
         Angle::azimuth_calc(ui->table, list);
     }
     else
@@ -103,6 +105,11 @@ void MainWindow::on_table_cellChanged(int row, int column)
 
             ui->table->item(row, column)->setText(Angle::angle_format(list));
         }
+        if (ui->table->item(row, column)->text() == "0") //formats angle if a single zero is provided as input
+        {
+            QStringList zero{"0", "0", "0"};
+            ui->table->item(row, column)->setText(Angle::angle_format(zero));
+        }
         return;
     }
 
@@ -110,6 +117,11 @@ void MainWindow::on_table_cellChanged(int row, int column)
     {
         if (Angle::validate(list))
         { ui->table->item(row, column)->setText(Angle::angle_format(list)); }
+        if (ui->table->item(row, column)->text() == "0") //formats angle if a single zero is provided as input
+        {
+            QStringList zero{"0", "0", "0"};
+            ui->table->item(row, column)->setText(Angle::angle_format(zero));
+        }
         return;
     }
 

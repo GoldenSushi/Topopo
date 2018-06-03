@@ -67,9 +67,12 @@ QStringList Angle::angle_calc(const QStringList &ang1, const QStringList &ang2, 
 
     if (param == SUM)
     {
+        int remain;
         second_result = (second1+second2)%60;
-        minute_result = ((minute1+minute2)%60) + (int)(second1+second2)/60;
-        angle_result = angle1+angle2;
+        remain = (int)(second1+second2)/60;
+        minute_result = (minute1+minute2+remain)%60;
+        remain = (int)(minute1+minute2+remain)/60;
+        angle_result = (angle1+angle2+remain);
         QStringList result{QString::number(angle_result), QString::number(minute_result), QString::number(second_result)};
         return result;
     }
@@ -121,20 +124,19 @@ void Angle::azimuth_calc(QTableWidget *table, const QStringList &ref_azimuth)
     int rows = table->rowCount();
     if (rows == 0) { return; }
 
-    QStringList results, current_reference = ref_azimuth;
+    QStringList results = ref_azimuth, current_reference = ref_azimuth;
 
     for (int i = 0; i < rows; ++i)
     {
-        if (i != 0 && table->item(i, HOR_ANG) && table->item(i-1, POINT)->text() == "Vante")
+        if (i != 0 && table->item(i-1, HOR_ANG) && table->item(i-1, POINT)->text() == "Vante")
         {
-            if (validate(clean_angle_txt(table->item(i, HOR_ANG)->text()).split(" ")))
-                current_reference = correct_azimuth(current_reference, clean_angle_txt(table->item(i, HOR_ANG)->text()).split(" "));
+            if (validate(clean_angle_txt(table->item(i-1, HOR_ANG)->text()).split(" ")))
+                current_reference = correct_azimuth(current_reference, clean_angle_txt(table->item(i-1, HOR_ANG)->text()).split(" "));
         }
-
         if (table->item(i, HOR_ANG) && validate(clean_angle_txt(table->item(i, HOR_ANG)->text()).split(" ")))
         {
             QStringList cell_angle = table->item(i, HOR_ANG)->text().split(" "); //angle extracted from this cell
-            results = correct_azimuth(clean_angle_txt(cell_angle), clean_angle_txt(current_reference));
+            if (i != 0) { results = correct_azimuth(clean_angle_txt(cell_angle), clean_angle_txt(current_reference)); } //first row must not be corrected
             table->item(i, AZIMUTH)->setText(angle_format(results));
         }
     }

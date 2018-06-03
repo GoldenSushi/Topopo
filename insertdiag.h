@@ -2,6 +2,7 @@
 #define INSERTDIAG_H
 
 #include <QDialog>
+#include <QLineEdit>
 
 namespace Ui {
 class InsertDiag;
@@ -18,6 +19,7 @@ public:
 
  public:
 
+    QLineEdit* getEntry2_ptr() const;
     QString getEntry1() const;
     QString getEntry2() const;
     QString getEntry3() const;
