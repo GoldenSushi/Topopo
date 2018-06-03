@@ -26,13 +26,7 @@ public:
     QString getEntry5() const;
     QString getEntry6() const;
 
-    void setEntry1(QString str) const;
-    void setEntry2(QString str) const;
-    void setEntry3(QString str) const;
-    void setEntry4(QString str) const;
-    void setEntry5(QString str) const;
-    void setEntry6(QString str) const;
-
+    void setEntry1(QString) const;
 
 private:
     Ui::InsertDiag *ui;

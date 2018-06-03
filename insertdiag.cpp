@@ -10,7 +10,7 @@ InsertDiag::InsertDiag(QWidget *parent) :
     setWindowTitle("Novo Ponto");
 }
 
-//********Getters and Setters******************************************
+//******** Getters and Setters ******************************************
 QString InsertDiag::getEntry1() const
 {
     return ui->entry1->text();
@@ -43,26 +43,6 @@ QString InsertDiag::getEntry6() const
 
 void InsertDiag::setEntry1(QString str) const {
     ui->entry1->setText(str);
-}
-
-void InsertDiag::setEntry2(QString str) const {
-    ui->entry2->setText(str);
-}
-
-void InsertDiag::setEntry3(QString str) const {
-    ui->entry3->setText(str);
-}
-
-void InsertDiag::setEntry4(QString str) const {
-    ui->entry4->setText(str);
-}
-
-void InsertDiag::setEntry5(QString str) const {
-    ui->entry5->setText(str);
-}
-
-void InsertDiag::setEntry6(QString str) const {
-    ui->entry6->setText(str);
 }
 //*******************************************************************
 

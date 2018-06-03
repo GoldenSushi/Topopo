@@ -9,6 +9,11 @@
 
 #define last_row ui->table->rowCount()-1
 
+enum columns
+{
+    STATION = 0, POINT,  HOR_ANG, AZIMUTH, HOR_DIST, OBS
+};
+
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
@@ -25,58 +30,25 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::debug_table()
-{
-    for (int i = 0; i < ui->table->columnCount(); ++i)
-        {
-            qDebug() << m_tableData[i];
-        }
-}
-
-void MainWindow::grab_table() //used to store table data into a vector
-{
-    int rows = ui->table->rowCount();
-    int columns = ui->table->columnCount();
-
-    for (int i = 0; i < rows; ++i)
-        for(int j = 0; j < columns; ++j)
-        {
-            if (ui->table->item(i,j))
-                m_tableData.push_back(ui->table->item(i,j)->text());
-            else
-                m_tableData.push_back("null");
-        }
-}
-
-//void MainWindow::closeEvent(QCloseEvent *event)
-//{
-//    grab_table();
-//}
-
 void MainWindow::on_newpoint_clicked()
 {
     InsertDiag diag;
     int return_signal;
     QString autofill = "";
 
-
-    //checks if item isnt null
-    if (ui->table->item(last_row, 0))
-        autofill = ui->table->item(last_row, 0)->text();
+    if (ui->table->item(last_row, 0)) { autofill = ui->table->item(last_row, 0)->text(); } //checks if item isnt null
 
     diag.setEntry1(autofill);
     return_signal = diag.exec();
 
     if (return_signal == InsertDiag::Accepted)
     {
-
         if(diag.getEntry1().isEmpty())
         {
             WarningDiag w_diag;
             w_diag.exec();
             return;
         }
-
         ui->table->insertRow(last_row+1);
         for (int column = 0; column < ui->table->columnCount(); ++column)
         {
@@ -96,13 +68,11 @@ void MainWindow::on_removepoint_clicked()
     ui->table->removeRow(ui->table->currentRow());
 }
 
+//******************* Events triggered on change / used to refresh data ************************************************************************************
 void MainWindow::on_azimuthEntry_textChanged(const QString &arg1)
 {
     int cursor_pos = ui->azimuthEntry->cursorPosition();
-    QString entry = arg1;
-
-    entry = Angle::clean_angle_txt(entry);
-
+    QString entry = Angle::clean_angle_txt(arg1);
     QStringList list = entry.split(" ");
 
     if (Angle::validate(list))
@@ -116,8 +86,6 @@ void MainWindow::on_azimuthEntry_textChanged(const QString &arg1)
         ui->azimuthEntry->setText(list.join(" "));
         ui->azimuthEntry->setCursorPosition(cursor_pos);
     }
-
-
 }
 
 void MainWindow::on_table_cellChanged(int row, int column)
@@ -131,7 +99,7 @@ void MainWindow::on_table_cellChanged(int row, int column)
         if (Angle::validate(list))
         {
             if (Angle::validate(Angle::clean_angle_txt(ui->azimuthEntry->text()).split(" "))) //updates azimuth if reference is valid
-                Angle::azimuth_calc(ui->table, Angle::clean_angle_txt(ui->azimuthEntry->text()).split(" "));
+            { Angle::azimuth_calc(ui->table, Angle::clean_angle_txt(ui->azimuthEntry->text()).split(" ")); }
 
             ui->table->item(row, column)->setText(Angle::angle_format(list));
         }
@@ -142,9 +110,31 @@ void MainWindow::on_table_cellChanged(int row, int column)
     {
         list = Angle::clean_angle_txt(ui->table->item(row, column)->text()).split(" ");
         if (Angle::validate(list))
-        {
-            ui->table->item(row, column)->setText(Angle::angle_format(list));
-        }
+        { ui->table->item(row, column)->setText(Angle::angle_format(list)); }
     }
-
 }
+
+//******************************************************************************************************************************************************
+
+//****************************** Unimplemented stuff / To be continued... **********************************************************************************
+void MainWindow::debug_table() //used only for debug purposes
+{
+    for (int i = 0; i < ui->table->columnCount(); ++i)
+        { qDebug() << m_tableData[i]; }
+}
+
+void MainWindow::grab_table() //used to store table data into a vector. will be user in the future for persistent data
+{
+    int rows = ui->table->rowCount();
+    int columns = ui->table->columnCount();
+
+    for (int i = 0; i < rows; ++i)
+        for(int j = 0; j < columns; ++j)
+        {
+            if (ui->table->item(i,j))
+                m_tableData.push_back(ui->table->item(i,j)->text());
+            else
+                m_tableData.push_back("null");
+        }
+}
+//******************************************************************************************************************************************************

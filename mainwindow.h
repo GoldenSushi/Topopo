@@ -12,19 +12,9 @@ class MainWindow : public QMainWindow
 {
     Q_OBJECT
 
-public: //public vars
-    enum
-    {
-        STATION = 0, POINT,  HOR_ANG, AZIMUTH, HOR_DIST, OBS
-    };
-
-
-public: //constructors
+public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
-
-//protected:
-//    void closeEvent(QCloseEvent*) override;
 
 private slots:
     void on_newpoint_clicked();
@@ -35,11 +25,11 @@ private slots:
 
     void on_table_cellChanged(int row, int column);
 
-private: //priv vars
+private:
     Ui::MainWindow *ui;
     QVector<QString> m_tableData;
 
-private: //priv methods
+private:
     void grab_table();
     void debug_table();
 };
