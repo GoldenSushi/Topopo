@@ -10,7 +10,7 @@ The data must be put in order, and the provided reference azimuth must be measur
 
    * In ll fields that receive angle values, for angles to be properly computed there must be no extra spaces. Any exceeding space will result in the program not recognizing the the values as angles.
 
-  * Program still doesn't support data persistence. That means there is no way to save the work as of now (yeah, that means the program is pretty useless... oh well ¯\\_(ツ)_/¯ ). Should be implemented soon, I promise.
+  * ~~Program still doesn't support data persistence. That means there is no way to save the work as of now (yeah, that means the program is pretty useless... oh well ¯\\_(ツ)_/¯ ). Should be implemented soon, I promise.~~
   
   * Rows can't be moved, only deleted and edited, which can be really annoying sometimes.
  
@@ -32,3 +32,7 @@ The data must be put in order, and the provided reference azimuth must be measur
   > At new point window, if Station column is filled focus will jump to the next field;
   >
   > Now table is refreshed after a new point is added.
+  * 18/06/2018
+  > Save and load functions are now implemented, yeaaah! Although a very primitive and basic system, table data can now be stored in a csv file by clicking in the save button. If data is organized accordingly (in the same column order it was saved in, and with the header included) it is also possible to load the file (not thoroughly tested though :v).
+  >
+  >New table added. The new table is responsible for the error calculations. For now it is only partially functional.
