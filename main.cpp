@@ -3,6 +3,7 @@
 #include <QApplication>
 #include <QPushButton>
 #include <QHBoxLayout>
+#include <QTextCodec>
 
 int main(int argc, char *argv[])
 {

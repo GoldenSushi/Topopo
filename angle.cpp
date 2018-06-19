@@ -101,6 +101,19 @@ QStringList Angle::angle_calc(const QStringList &ang1, const QStringList &ang2, 
     }
 }
 
+QStringList Angle::angle_summation(QVector<QStringList> &list)
+{
+    QStringList result{"0", "0", "0"};
+    for (int i = 0; i < list.size(); i++)
+    {
+        if (validate(list[i]))
+        {
+            result = angle_calc(result, list[i]);
+        }
+    }
+    return result;
+}
+
 QStringList Angle::correct_azimuth(const QStringList &azimuth, const QStringList &hor_ang)
 {
     QStringList result = angle_calc(azimuth, hor_ang);
@@ -133,7 +146,7 @@ void Angle::azimuth_calc(QTableWidget *table, const QStringList &ref_azimuth)
             if (validate(clean_angle_txt(table->item(i-1, HOR_ANG)->text()).split(" ")))
                 current_reference = correct_azimuth(current_reference, clean_angle_txt(table->item(i-1, HOR_ANG)->text()).split(" "));
         }
-        if (table->item(i, HOR_ANG) && validate(clean_angle_txt(table->item(i, HOR_ANG)->text()).split(" ")))
+        if (table->item(i, AZIMUTH) && table->item(i, HOR_ANG) && validate(clean_angle_txt(table->item(i, HOR_ANG)->text()).split(" ")))
         {
             QStringList cell_angle = table->item(i, HOR_ANG)->text().split(" "); //angle extracted from this cell
             if (i != 0) { results = correct_azimuth(clean_angle_txt(cell_angle), clean_angle_txt(current_reference)); } //first row must not be corrected

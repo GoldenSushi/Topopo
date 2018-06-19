@@ -1,6 +1,6 @@
 #include "insertdiag.h"
 #include "ui_insertdiag.h"
-#include "warningdiag.h"
+#include "filedialog.h"
 
 InsertDiag::InsertDiag(QWidget *parent) :
     QDialog(parent),

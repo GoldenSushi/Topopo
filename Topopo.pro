@@ -31,15 +31,18 @@ SOURCES += \
         mainwindow.cpp \
     insertdiag.cpp \
     angle.cpp \
-    warningdiag.cpp
+    filedialog.cpp \
+    rectcoord.cpp
 
 HEADERS += \
         mainwindow.h \
     insertdiag.h \
     angle.h \
-    warningdiag.h
+    filemanager.h \
+    filedialog.h \
+    rectcoord.h
 
 FORMS += \
         mainwindow.ui \
     insertdiag.ui \
-    warningdiag.ui
+    filedialog.ui

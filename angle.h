@@ -33,6 +33,8 @@ namespace Angle {
 
     QStringList angle_calc(const QStringList &, const QStringList &, calc_params param = SUM);
 
+    QStringList angle_summation(QVector<QStringList> &);
+
     QStringList correct_azimuth(const QStringList &, const QStringList &);
 
     void azimuth_calc(QTableWidget *, const QStringList &);

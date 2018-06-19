@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>688</width>
-    <height>331</height>
+    <width>712</width>
+    <height>402</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -74,6 +74,12 @@ QLineEdit:focus
 	padding: 3px
 }</string>
   </property>
+  <property name="toolButtonStyle">
+   <enum>Qt::ToolButtonIconOnly</enum>
+  </property>
+  <property name="tabShape">
+   <enum>QTabWidget::Rounded</enum>
+  </property>
   <widget class="QWidget" name="centralWidget">
    <property name="sizePolicy">
     <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
@@ -91,68 +97,374 @@ QLineEdit:focus
     <string notr="true"/>
    </property>
    <layout class="QGridLayout" name="gridLayout">
-    <item row="4" column="0" colspan="3">
-     <widget class="QTableWidget" name="table">
+    <item row="2" column="0" rowspan="2">
+     <widget class="QPushButton" name="savebutton">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>30</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Salvar</string>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QPushButton" name="removepoint">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="baseSize">
+       <size>
+        <width>10</width>
+        <height>10</height>
+       </size>
+      </property>
+      <property name="text">
+       <string>Remover Ponto</string>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" colspan="4">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="styleSheet">
+       <string notr="true">QTabBar::tab
+{
+background: qlineargradient(x1: 0, y2: 0, x2: 0, y2: 1, stop:0 #6d6c66, stop : 1 #878c89);
+}
+
+QTabBar::tab:selected, QTabBar::tab:hover 
+{
+	background: qlineargradient(x1: 0, y1: 0, x2 : 0, y2:1, stop:0 #e7e7e7, stop: 0.3 #dddddd, stop: 0.6 #e7e7e7, stop: 1 #dddddd)
+}</string>
+      </property>
+      <property name="tabPosition">
+       <enum>QTabWidget::North</enum>
+      </property>
+      <property name="tabShape">
+       <enum>QTabWidget::Rounded</enum>
+      </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <property name="elideMode">
+       <enum>Qt::ElideNone</enum>
+      </property>
+      <property name="movable">
+       <bool>true</bool>
+      </property>
+      <property name="tabBarAutoHide">
+       <bool>false</bool>
+      </property>
+      <widget class="QWidget" name="data">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Maximum" vsizetype="Maximum">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <attribute name="title">
+        <string>Dados de Campo</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_3">
+        <property name="sizeConstraint">
+         <enum>QLayout::SetNoConstraint</enum>
+        </property>
+        <item row="0" column="0">
+         <widget class="QTableWidget" name="table">
+          <property name="minimumSize">
+           <size>
+            <width>670</width>
+            <height>163</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="autoFillBackground">
+           <bool>true</bool>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="sizeAdjustPolicy">
+           <enum>QAbstractScrollArea::AdjustIgnored</enum>
+          </property>
+          <attribute name="horizontalHeaderVisible">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="horizontalHeaderCascadingSectionResizes">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>50</number>
+          </attribute>
+          <attribute name="horizontalHeaderMinimumSectionSize">
+           <number>50</number>
+          </attribute>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="verticalHeaderDefaultSectionSize">
+           <number>50</number>
+          </attribute>
+          <attribute name="verticalHeaderMinimumSectionSize">
+           <number>50</number>
+          </attribute>
+          <column>
+           <property name="text">
+            <string>Estação</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Ponto Visado</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Ângulo Horizontal</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Azimute</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Distância Horizontal</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Observações</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QFrame" name="angleBar">
+          <property name="styleSheet">
+           <string notr="true">QFrame
+{
+	background:gray;
+	border:none;
+}</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_4">
+           <item row="0" column="0">
+            <widget class="QLabel" name="sumText">
+             <property name="styleSheet">
+              <string notr="true">QLabel
+{
+	color:white;
+	font:bold;
+}</string>
+             </property>
+             <property name="text">
+              <string>Soma dos Ângulos de Vante:</string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="errorCalculation">
+       <attribute name="title">
+        <string>Cálculo de Erros</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_6">
+        <item row="0" column="0">
+         <widget class="QTableWidget" name="table_error">
+          <property name="minimumSize">
+           <size>
+            <width>670</width>
+            <height>163</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>16777215</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="autoFillBackground">
+           <bool>true</bool>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="sizeAdjustPolicy">
+           <enum>QAbstractScrollArea::AdjustIgnored</enum>
+          </property>
+          <attribute name="horizontalHeaderCascadingSectionResizes">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="horizontalHeaderDefaultSectionSize">
+           <number>50</number>
+          </attribute>
+          <attribute name="horizontalHeaderMinimumSectionSize">
+           <number>50</number>
+          </attribute>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <attribute name="verticalHeaderDefaultSectionSize">
+           <number>50</number>
+          </attribute>
+          <attribute name="verticalHeaderMinimumSectionSize">
+           <number>50</number>
+          </attribute>
+          <column>
+           <property name="text">
+            <string>Estação</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Ponto Visado</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Coordenadas X</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Fator X</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>X Corrigido</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Coordenadas Y</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Fator Y</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Y Corrigido</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <widget class="QFrame" name="errorBar">
+          <property name="styleSheet">
+           <string notr="true">QFrame
+{
+	background:gray;
+	border:none;
+}</string>
+          </property>
+          <property name="frameShape">
+           <enum>QFrame::StyledPanel</enum>
+          </property>
+          <property name="frameShadow">
+           <enum>QFrame::Raised</enum>
+          </property>
+          <layout class="QGridLayout" name="gridLayout_5">
+           <item row="0" column="0">
+            <widget class="QLabel" name="errorText1">
+             <property name="styleSheet">
+              <string notr="true">QLabel
+{
+	color:white;
+	font:bold;
+}</string>
+             </property>
+             <property name="text">
+              <string>Soma de X :</string>
+             </property>
+            </widget>
+           </item>
+           <item row="0" column="1">
+            <widget class="QLabel" name="errorText2">
+             <property name="styleSheet">
+              <string notr="true">QLabel
+{
+	color:white;
+	font:bold;
+}</string>
+             </property>
+             <property name="text">
+              <string>Soma de Y : </string>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </item>
+    <item row="0" column="0">
+     <widget class="QPushButton" name="newpoint">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>50</width>
+        <height>50</height>
+       </size>
+      </property>
       <property name="styleSheet">
        <string notr="true"/>
       </property>
-      <attribute name="horizontalHeaderVisible">
-       <bool>true</bool>
-      </attribute>
-      <attribute name="horizontalHeaderCascadingSectionResizes">
-       <bool>false</bool>
-      </attribute>
-      <attribute name="horizontalHeaderDefaultSectionSize">
-       <number>50</number>
-      </attribute>
-      <attribute name="horizontalHeaderMinimumSectionSize">
-       <number>50</number>
-      </attribute>
-      <attribute name="horizontalHeaderStretchLastSection">
-       <bool>true</bool>
-      </attribute>
-      <attribute name="verticalHeaderVisible">
-       <bool>false</bool>
-      </attribute>
-      <attribute name="verticalHeaderDefaultSectionSize">
-       <number>50</number>
-      </attribute>
-      <attribute name="verticalHeaderMinimumSectionSize">
-       <number>50</number>
-      </attribute>
-      <column>
-       <property name="text">
-        <string>Estação</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Ponto Visado</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Ângulo Horizontal</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Azimute</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Distância Horizontal</string>
-       </property>
-      </column>
-      <column>
-       <property name="text">
-        <string>Observações</string>
-       </property>
-      </column>
+      <property name="text">
+       <string>Novo Ponto</string>
+      </property>
      </widget>
     </item>
-    <item row="1" column="2" alignment="Qt::AlignHCenter">
+    <item row="0" column="3">
      <widget class="QFrame" name="frame">
       <property name="frameShape">
        <enum>QFrame::StyledPanel</enum>
@@ -202,30 +514,8 @@ QLineEdit:focus
       </layout>
      </widget>
     </item>
-    <item row="1" column="0">
-     <widget class="QPushButton" name="newpoint">
-      <property name="sizePolicy">
-       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-        <horstretch>0</horstretch>
-        <verstretch>0</verstretch>
-       </sizepolicy>
-      </property>
-      <property name="minimumSize">
-       <size>
-        <width>50</width>
-        <height>50</height>
-       </size>
-      </property>
-      <property name="styleSheet">
-       <string notr="true"/>
-      </property>
-      <property name="text">
-       <string>Novo Ponto</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="1">
-     <widget class="QPushButton" name="removepoint">
+    <item row="2" column="1" rowspan="2">
+     <widget class="QPushButton" name="loadbutton">
       <property name="sizePolicy">
        <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
         <horstretch>0</horstretch>
@@ -239,7 +529,7 @@ QLineEdit:focus
        </size>
       </property>
       <property name="text">
-       <string>Remover Ponto</string>
+       <string>Carregar</string>
       </property>
      </widget>
     </item>

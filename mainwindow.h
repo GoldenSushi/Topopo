@@ -25,13 +25,18 @@ private slots:
 
     void on_table_cellChanged(int row, int column);
 
+    void on_savebutton_clicked();
+
+    void on_table_itemChanged(QTableWidgetItem *item);
+
+    void on_loadbutton_clicked();
+
+    void on_table_error_cellChanged(int row, int column);
+
 private:
     Ui::MainWindow *ui;
     QVector<QString> m_tableData;
 
-private:
-    void grab_table();
-    void debug_table();
 };
 
 #endif // MAINWINDOW_H
