@@ -36,3 +36,8 @@ The data must be put in order, and the provided reference azimuth must be measur
   > Save and load functions are now implemented, yeaaah! Although a very primitive and basic system, table data can now be stored in a csv file by clicking in the save button. If data is organized accordingly (in the same column order it was saved in, and with the header included) it is also possible to load the file (not thoroughly tested though :v).
   >
   >New table added. The new table is responsible for the error calculations. For now it is only partially functional.
+  * 24//06/2018
+  > Corrected issue where loading would cause the program to crash.
+  > Error table only calculates corrections for polygon entries (rows where the word "Vante" is found) as it should be.
+  > Most fields now update automatically.
+  > Just attempted to make my Topography project using it. Seems to be working correctly (or else I'm screwed).
