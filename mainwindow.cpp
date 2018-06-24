@@ -186,6 +186,8 @@ void MainWindow::on_table_cellChanged(int row, int column)
                     {
                         using namespace RectCoord;
                         if      (ui->table->item(row, HOR_DIST) &&
+                                 ui->table_error->item(row, XCOORDINATE) &&
+                                 ui->table_error->item(row, YCOORDINATE) &&
                                 (distance = validate(ui->table->item(row, HOR_DIST)->text())) &&
                                 (decimalAzimuth = dmsToDecimal(list)))
                         {
@@ -238,8 +240,6 @@ void MainWindow::on_table_cellChanged(int row, int column)
                 return;
     }
 
-
-
     }
 }
 
@@ -273,7 +273,9 @@ void MainWindow::on_table_error_cellChanged(int row, int column)
                 QVector<QString> distSum;
                 for (int i = 0; i < ui->table_error->rowCount(); ++i)
                 {
-                    if (ui->table_error->item(i, XCOORDINATE))
+                    if (ui->table_error->item(i, XCOORDINATE) &&
+                       (ui->table->item(i, Angle::POINT)) &&
+                       (ui->table->item(i, Angle::POINT)->text() == "Vante"))
                     {
                         distSum.push_back(ui->table_error->item(i, XCOORDINATE)->text());
                     }
@@ -283,6 +285,26 @@ void MainWindow::on_table_error_cellChanged(int row, int column)
                     double sum = RectCoord::distSummation(distSum);
                     sumText += QString::number(sum);
                     ui->errorText1->setText(sumText);
+
+                    for (int i = 0; i < ui->table_error->rowCount(); ++i)
+                    {
+                        if((ui->table->item(i, Angle::POINT)) &&
+                           (ui->table->item(i, Angle::POINT)->text() == "Vante"))
+                        {
+                            double factorX;
+                            double correctedX;
+                            if ((ui->table_error->item(i, XCOORDINATE)) &&
+                                (ui->table_error->item(i, CORRECTEDX)) &&
+                                (ui->table_error->item(i, XFACTOR)))
+                            {
+                                factorX = sum/ui->table_error->rowCount();
+                                correctedX = (ui->table_error->item(i, XCOORDINATE)->text()).toDouble() + factorX;
+
+                                ui->table_error->item(i, XFACTOR)->setText(QString::number(factorX));
+                                ui->table_error->item(i, CORRECTEDX)->setText(QString::number(correctedX));
+                            }
+                        }
+                    }
                 }
     }
 
@@ -292,7 +314,9 @@ void MainWindow::on_table_error_cellChanged(int row, int column)
                 QVector<QString> distSum;
                 for (int i = 0; i < ui->table_error->rowCount(); ++i)
                 {
-                    if (ui->table_error->item(i, YCOORDINATE))
+                    if (ui->table_error->item(i, YCOORDINATE) &&
+                       (ui->table->item(i, Angle::POINT)) &&
+                       (ui->table->item(i, Angle::POINT)->text() == "Vante"))
                     {
                         distSum.push_back(ui->table_error->item(i, YCOORDINATE)->text());
                     }
@@ -302,6 +326,26 @@ void MainWindow::on_table_error_cellChanged(int row, int column)
                     double sum = RectCoord::distSummation(distSum);
                     sumText += QString::number(sum);
                     ui->errorText2->setText(sumText);
+
+                    for (int i = 0; i < ui->table_error->rowCount(); ++i)
+                    {
+                        if((ui->table->item(i, Angle::POINT)) &&
+                           (ui->table->item(i, Angle::POINT)->text() == "Vante"))
+                        {
+                            double factorY;
+                            double correctedY;
+                            if ((ui->table_error->item(i, YCOORDINATE)) &&
+                                (ui->table_error->item(i, CORRECTEDY)) &&
+                                (ui->table_error->item(i, YFACTOR)))
+                            {
+                                factorY = sum/ui->table_error->rowCount();
+                                correctedY = (ui->table_error->item(i, YCOORDINATE)->text()).toDouble() + factorY;
+
+                                ui->table_error->item(i, YFACTOR)->setText(QString::number(factorY));
+                                ui->table_error->item(i, CORRECTEDY)->setText(QString::number(correctedY));
+                            }
+                        }
+                    }
                 }
     }
     }

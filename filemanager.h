@@ -67,7 +67,7 @@ void clearTable(QTableWidget *table, QTableWidget *table_error)
 static void loadCsv(QTableWidget * table, QTableWidget *table_error, QString &filename)
 {
     QStringList fields;
-    int totalColumnCount = table->columnCount() + table_error->columnCount() - 2; //minus two to compensate the repeated columns
+    int totalColumnCount = table->columnCount() + table_error->columnCount() - 2; //minus two to compensate the eliminated repeated columns
     QFile file(filename);
     if (file.open(QIODevice::ReadOnly))
     {
@@ -75,13 +75,14 @@ static void loadCsv(QTableWidget * table, QTableWidget *table_error, QString &fi
 
         FileManager::clearTable(table, table_error);
         int count = 0;
-        int table_errorCount = 0;
+        int table_errorCount;
         input.readLine(); //discards header
         while (!input.atEnd())
         {
             fields = input.readLine().split(";");
             table->insertRow(count);
             table_error->insertRow(count);
+            table_errorCount = 0;
             for (int i = 0; i < totalColumnCount; ++i)
             {
                 if (i <= 1 )

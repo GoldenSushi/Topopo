@@ -14,7 +14,7 @@ double RectCoord::distSummation(const QVector<QString> &distSum)
     {
         if (validate(distSum[i]))
         {
-            number += abs(distSum[i].toDouble());
+            number += (distSum[i].toDouble());
         }
     }
     return number;

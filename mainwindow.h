@@ -15,6 +15,7 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    Ui::MainWindow *ui;
 
 private slots:
     void on_newpoint_clicked();
@@ -34,7 +35,6 @@ private slots:
     void on_table_error_cellChanged(int row, int column);
 
 private:
-    Ui::MainWindow *ui;
     QVector<QString> m_tableData;
 
 };
