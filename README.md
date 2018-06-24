@@ -38,6 +38,9 @@ The data must be put in order, and the provided reference azimuth must be measur
   >New table added. The new table is responsible for the error calculations. For now it is only partially functional.
   * 24//06/2018
   > Corrected issue where loading would cause the program to crash.
+  >
   > Error table only calculates corrections for polygon entries (rows where the word "Vante" is found) as it should be.
+  >
   > Most fields now update automatically.
+  >
   > Just attempted to make my Topography project using it. Seems to be working correctly (or else I'm screwed).
